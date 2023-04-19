@@ -14,7 +14,7 @@ const login = (email) =>{
     if(email === "test@test.com"){
         return {status: 200, message: "Ok Authenticated"}
     }
-    return {status: 401, message: "Bad Request!"}
+    return {status: 401, message: "Bad Request! You are not authenticated"}
 }
 
 
