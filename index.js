@@ -15,6 +15,7 @@ app.get("/", (req, res)=>{
     res.json({message: "ok from the server side."})
 });
 
+
 app.use("/api/auth/", auth);
 
 app.listen(port, () =>{
