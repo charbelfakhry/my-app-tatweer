@@ -1,17 +1,20 @@
 const express = require("express");
-const { register, login } = require("../services/auth");
+const { register, login, authenticate } = require("../services/auth");
 const router = express.Router();
 
-router.get("/login", (req, res)=>{
-    const {email} = req.query;
+router.post("/authenticate", async(req, res)=>{
+    const {data} = req.body;
     // check if the variable email is not null and not undefined
-    if(!email){
+    //validation 
+    if(!data){
         res.status(400).json({message: "Bad Request!"});
     }
-    const result = login(req.query.email);
+    const result = await authenticate(data);
+    console.log(result);
     if(result.status === 200){
-        res.status(result.status).json(result.message);
+        res.status(200).json(result.message, result.user);
     }
+    //inappropriate request
     res.status(result.status).json(result.message);
 
 });
