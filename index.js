@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use(cors({origin: '*'}));
 
 const auth = require("./routes/auth");
+const users = require("./routes/users");
 
 /**
  * Get. to get information. login, checkUser.
@@ -34,6 +35,7 @@ app.get("/", (req, res)=>{
 
 
 app.use("/api/auth/", auth);
+app.use("/api/users", users);
 
 app.listen(port, () =>{
     console.log(`my app is running on the port ${port}`)
