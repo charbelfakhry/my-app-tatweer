@@ -2,18 +2,15 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 port = process.env.PORT || 3001;
 
-// app.use(express.json);
-// app.use(
-//     express.urlencoded({
-//         extended: true,
-//     })
-// );
+const currentDirectory = __dirname;
+const buildDirectory = path.join(currentDirectory, 'build');
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Allow all CORS request
