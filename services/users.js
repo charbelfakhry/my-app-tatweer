@@ -35,6 +35,18 @@ const insertUser = async (user) =>{
         return {message: "records inserted successfully."}
     }catch(error){
         console.error(error);
+        return {message: "Failed to insert"}
+    }
+}
+
+const updateUser = async (user) => {
+    const {id, firstName, lastName, email, phone} = user;
+    const sql = `UPDATE client set client_first_name = ?, client_last_name = ?, client_email = ?, client_mobile = ? WHERE client_id = ?`;
+    try{
+        await db.query(sql, [firstName, lastName, email, phone, id]);
+        return {message: "records updated successfully."}
+    }catch(error){
+        return {message: "Failed to updated"}
     }
 }
 
@@ -43,4 +55,5 @@ module.exports ={
     getAllUsers,
     deleteUser,
     insertUser,
+    updateUser,
 }

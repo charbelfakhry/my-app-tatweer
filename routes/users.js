@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllUsers, deleteUser, insertUser } = require("../services/users");
+const { getAllUsers, deleteUser, insertUser, updateUser } = require("../services/users");
 const router = express.Router();
 
 router.get("/getAllUsers", async (req, res) => {
@@ -13,8 +13,14 @@ router.get("/getAllUsers", async (req, res) => {
 
 router.post("/insertUser", async (req, res) => {
     const {user} = req.body;
-    console.log(user);
-    insertUser(user);
+    const result = await insertUser(user);
+    res.status(200).json(result);
+});
+
+router.post("/updateUser", async (req, res) =>{
+  const {user} = req.body;
+  const result = await updateUser(user);
+  res.status(200).json(result);
 })
 
 router.post("/deleteUser", async (req, res) => {
