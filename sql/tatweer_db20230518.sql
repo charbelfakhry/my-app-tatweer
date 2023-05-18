@@ -36,7 +36,7 @@ CREATE TABLE `client` (
   PRIMARY KEY (`client_id`),
   KEY `client_country__country_id_idx` (`country_id`),
   CONSTRAINT `client_country__country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`) ON DELETE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (2,1,'John','Claim','john@claim.com','123','pwd','',1,'2000-10-10 00:00:00'),(3,3,'John3','Claim','john@claim.com','123','pwd','',1,'2000-10-10 00:00:00'),(4,2,'John2','Claim','john@claim.com','123','pwd','',1,'2000-10-10 00:00:00'),(5,NULL,'test','test','test',NULL,NULL,NULL,NULL,'2020-10-10 00:00:00');
+INSERT INTO `client` VALUES (2,1,'John','Claim','john@claim.com','123','pwd123','',1,'2000-10-10 00:00:00'),(3,3,'John3','Claim','john@claim.com','123','pwd','',1,'2000-10-10 00:00:00'),(7,NULL,'1','2','1@2.com','1',NULL,NULL,NULL,NULL),(8,NULL,'1','2','1@2.com','1',NULL,NULL,NULL,NULL),(9,NULL,'3','3','3@3.com','333',NULL,NULL,NULL,NULL),(10,NULL,'3','3','3@3.com','333',NULL,NULL,NULL,NULL),(11,NULL,'3','3','3@3.com','333',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,6 +129,10 @@ INSERT INTO `product` VALUES (1,'tv sam 35',NULL,1000.00,15,10),(2,'tv tosh 35',
 UNLOCK TABLES;
 
 --
+-- Dumping events for database 'tatweer_db'
+--
+
+--
 -- Dumping routines for database 'tatweer_db'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `product_by_country` */;
@@ -164,4 +168,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-26 18:56:21
+-- Dump completed on 2023-05-18 18:42:14
