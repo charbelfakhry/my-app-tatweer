@@ -50,10 +50,25 @@ const updateUser = async (user) => {
     }
 }
 
+const authenticateUser = async (user) =>{
+    const {username, password} = user;
+    const sql = `SELECT * FROM client WHERE client_username = ? AND client_password = ?`;
+    try{
+        const result = await db.query(sql, [username, password]);
+        if(result && result.length > 0){
+            return {message: "success", result: result[0]}
+        }
+        return {message:"Wrong Username/password"}
+    }catch(error){
+        return {messagge: "error"}
+    }
+}
+
 
 module.exports ={
     getAllUsers,
     deleteUser,
     insertUser,
     updateUser,
+    authenticateUser,
 }

@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllUsers, deleteUser, insertUser, updateUser } = require("../services/users");
+const { getAllUsers, deleteUser, insertUser, updateUser, authenticateUser } = require("../services/users");
 const router = express.Router();
 
 router.get("/getAllUsers", async (req, res) => {
@@ -33,6 +33,17 @@ router.post("/deleteUser", async (req, res) => {
   const result = await deleteUser(id);
 
 });
+
+router.post("/authenticateUser", async (req, res) => {
+   const {user} = req.body;
+  const result = await authenticateUser(user);
+  if(result.message === "success"){
+    res.status(200).json(result.result)
+  }else{
+    res.status(200).json("Unauthenticated");
+  }
+
+})
 
 // router.delete("/deleteUser/:id", async (req, res) => {
 //     const id = req.params.id;
