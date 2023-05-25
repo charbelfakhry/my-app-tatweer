@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllUsers, deleteUser, insertUser, updateUser, authenticateUser } = require("../services/users");
+const { getAllUsers, deleteUser, insertUser, updateUser, authenticateUser, loadRefTableInfo } = require("../services/users");
 const router = express.Router();
 
 router.get("/getAllUsers", async (req, res) => {
@@ -42,6 +42,13 @@ router.post("/authenticateUser", async (req, res) => {
   }else{
     res.status(200).json("Unauthenticated");
   }
+
+});
+
+router.post("/loadRefernceTableInfo", async (req, res) =>{
+  const {tableName, value, label} = req.body;
+  const result = await loadRefTableInfo(tableName, value, label);
+  res.status(200).json(result);
 
 })
 

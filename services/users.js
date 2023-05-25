@@ -64,6 +64,18 @@ const authenticateUser = async (user) =>{
     }
 }
 
+const loadRefTableInfo = async (tableName, value, label) =>{
+
+    let sql = `SELECT ${value} as id, ${label} as label FROM ${tableName}`;
+    try{
+        const result = await db.query(sql);
+        return {message: "success", result}
+    }catch(error){
+        return {message: error}
+    }
+
+}
+
 
 module.exports ={
     getAllUsers,
@@ -71,4 +83,5 @@ module.exports ={
     insertUser,
     updateUser,
     authenticateUser,
+    loadRefTableInfo,
 }
