@@ -18,6 +18,7 @@ app.use(cors({origin: '*'}));
 
 const auth = require("./routes/auth");
 const users = require("./routes/users");
+const products = require("./routes/products");
 
 /**
  * Get. to get information. login, checkUser.
@@ -33,6 +34,7 @@ app.get("/", (req, res)=>{
 
 app.use("/api/auth/", auth);
 app.use("/api/users", users);
+app.use("/api/products", products);
 
 app.listen(port, () =>{
     console.log(`my app is running on the port ${port}`)
