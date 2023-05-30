@@ -1,5 +1,6 @@
 const express = require("express");
-const { getProducts, insertProduct } = require("../services/products");
+const { getProducts, insertProduct, deleteProduct } = require("../services/products");
+const { updateProduct } = require("../services/products");
 const router = express.Router();
 
 router.get("/getProducts", async (req, res) => {
