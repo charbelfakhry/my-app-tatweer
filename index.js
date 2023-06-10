@@ -21,6 +21,7 @@ const users = require("./routes/users");
 const products = require("./routes/products");
 const categories = require("./routes/categories");
 const typyicode = require("./routes/typyicode");
+const clientsqlz = require("./routes/clientSqlz");
 
 /**
  * Get. to get information. login, checkUser.
@@ -38,7 +39,9 @@ app.use("/api/auth/", auth);
 app.use("/api/users", users);
 app.use("/api/products", products);
 app.use("/api/categories", categories);
-app.use("/api/typyicode", typyicode)
+app.use("/api/typyicode", typyicode);
+app.use("/api/clientsqlz", clientsqlz);
+
 
 app.listen(port, () =>{
     console.log(`my app is running on the port ${port}`)
