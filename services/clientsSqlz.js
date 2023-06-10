@@ -15,8 +15,8 @@ const createClient = async (firstName, lastName, username, password, email, mobi
 
 const getAllClients = async () =>{
     try{
-        const clients = await Client.findAll();
-        return clients;
+        const client = await Client.findAll();
+        return client;
     }catch(e){
         console.error(e);
     }

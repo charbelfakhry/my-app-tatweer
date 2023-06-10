@@ -2,7 +2,7 @@ const {DataTypes} = require("sequelize");
 const sequelize = require("../DB/configSqlz");
 
 
-const Client = sequelize.define('client', {
+const Client = sequelize.define('Client', {
     client_id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -46,6 +46,12 @@ const Client = sequelize.define('client', {
         defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         //defaultValue: DataTypes.NOW,
     },
-});
+    
+},{
+    tableName: "client",
+    createdAt: false,
+    updatedAt: false,
+}
+);
 
 module.exports = Client;
