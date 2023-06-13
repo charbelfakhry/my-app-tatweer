@@ -5,10 +5,20 @@ const Client = require("../model/Client");
 const createClient = async (firstName, lastName, username, password, email, mobile, address, gender, dob) =>{
 
     try{
-        const newClient = await Client.create({firstName, lastName, username, password, email, mobile, address, gender, dob});
+        const newClient = await Client.create({
+            client_first_name:firstName, 
+            client_last_name:lastName,
+            client_username:username,
+            client_password:password,
+            client_email:email,
+            client_mobile:mobile,
+            client_address:address,
+            client_dob:dob,
+            client_gender:gender
+        })
         return newClient.toJSON();
     }catch(e){
-        console.error('Error creating client', error);
+        console.error('Error creating client', e);
     }
 
 }
@@ -36,24 +46,19 @@ const getClientById = async (id) =>{
 
 const updateClient = async (id, firstName, lastName, username, password, email, mobile, address, gender, dob) => {
     try{
-        // fetched the user to update
-        const client = await Client.findByPk(id);
-        
-        if(client){
-            
-            client.firstName = firstName;
-            client.lastName = lastName,
-            client.username = username,
-            client.password = password;
-            client.email = email;
-            client.mobile = mobile;
-            client.address = address,
-            client.gender = gender;
-            client.dob = dob;
+        const updateClient = await Client.update({
+            client_first_name:firstName,
+            client_last_name:lastName,
+            client_username:username,
+            client_password:password,
+            client_email:email,
+            client_mobile:mobile,
+            client_address:address,
+            client_dob:dob,
+            client_gender:gender
+        }, {where: {client_id: id}});
 
-            const updatedClient = await client.save();
-            return updatedClient.toJSON();
-        }
+        return updateClient;
     }catch(error){
         console.error(error);
     }

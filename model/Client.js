@@ -1,57 +1,70 @@
-const {DataTypes} = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../DB/configSqlz");
+const Country = require("./Country");
 
 
 const Client = sequelize.define('Client', {
-    client_id:{
+    client_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    client_first_name:{
+    country_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
+    client_first_name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    client_last_name:{
+    client_last_name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    client_username:{
+    client_username: {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    client_email:{
+    client_email: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    client_mobile:{
+    client_mobile: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    client_password:{
+    client_password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    client_address:{
+    client_address: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    client_gender:{
+    client_gender: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
     },
-    client_dob:{
+    client_dob: {
         type: DataTypes.DATE,
         allowNull: true,
         defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         //defaultValue: DataTypes.NOW,
     },
-    
-},{
+    role: {
+        type: DataTypes.ENUM('user', 'admin', 'superuser'),
+        allowNull: true,
+    }
+
+}, {
     tableName: "client",
     createdAt: false,
     updatedAt: false,
 }
 );
+
+Client.associate = () => {
+    Client.belongsTo(Country, {foreignKey: 'country_id'});
+}
 
 module.exports = Client;

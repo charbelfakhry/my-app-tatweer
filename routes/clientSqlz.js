@@ -6,9 +6,9 @@ router.get("/getAllClients", async(req, res) =>{
   const result = await getAllClients();
   if(result){
     res.status(200).json(result);
+  }else{
+    res.status(500).json({message: "error getting clients"});
   } 
-
-  res.status(500).json({message: "error getting clients"});
 });
 
 router.post("/insertClient", async (req, res)=>{
@@ -16,8 +16,9 @@ router.post("/insertClient", async (req, res)=>{
   const result = await createClient(firstName, lastName, username, password, email, mobile, address, gender, dob);
   if(result){
     res.status(200).json({message: "client inserted", result});
+  }else{
+    res.status(500).json({message: "error inserting client"});
   }
-  res.status(500).json({message: "error inserting client"});
 });
 
 router.post("/updateClient", async (req, res) => {
@@ -25,8 +26,9 @@ router.post("/updateClient", async (req, res) => {
   const result = await updateClient(id, firstName, lastName, username, password, email, mobile, address, gender, dob);
   if(result){
     res.status(200).json({message: "client updated", result});
+  }else{
+    res.status(500).json({message: "error updating client"});
   }
-  res.status(500).json({message: "error updating client"});
 })
 
 router.post("/deleteClient", async (req, res) =>{
@@ -34,8 +36,9 @@ router.post("/deleteClient", async (req, res) =>{
   const result = await deleteClient(id);
   if(result){
     res.status(200).json({message: "client deleted", result});
+  }else{
+    res.status(500).json({message: "error deleting client"});
   }
-  res.status(500).json({message: "error deleting client"});
 })
 
 router.post("/authenticateClient", async (req, res)=>{
