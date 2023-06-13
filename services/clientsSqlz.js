@@ -1,5 +1,6 @@
 // CRUD
 const Client = require("../model/Client");
+const Country = require("../model/Country");
 
 // create client
 const createClient = async (firstName, lastName, username, password, email, mobile, address, gender, dob) =>{
@@ -25,7 +26,7 @@ const createClient = async (firstName, lastName, username, password, email, mobi
 
 const getAllClients = async () =>{
     try{
-        const client = await Client.findAll();
+        const client = await Client.findAll({include: [{model: Country}]});
         return client;
     }catch(e){
         console.error(e);
