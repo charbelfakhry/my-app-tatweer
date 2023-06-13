@@ -72,20 +72,24 @@ const deleteClient = async(id) =>{
 }
 
 const authenticateClient = async (username, password) => {
+    let response = {
+        message: "not authenticated",
+        client: null,
+    }
     try{
         const client = await Client.findOne({where: {client_username: username}});
         if(client){
-            if(client.password === password){
-                return client.toJSON();
+            if(client.client_password === password){
+                response.message = "authenticated";
+                response.client = client;
             }
-            return "Not authenticated";
         }
-
-        return "Client Not found";
 
     }catch(error){
         console.error(error);
     }
+
+    return response;
 }
 
 module.exports = {
