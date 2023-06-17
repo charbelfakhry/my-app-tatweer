@@ -1,8 +1,31 @@
 const express = require("express");
 const { getAllUsers, deleteUser, insertUser, updateUser, authenticateUser, loadRefTableInfo } = require("../services/users");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+var secretKey = "cSHUl|rPef1SgvR-#zNN*6#DGs/l|/%/_2?4&({Edd:BZ9DQ[l]pDkJmvb$u%}3";
 
-router.get("/getAllUsers", async (req, res) => {
+
+// middleware function
+const authenticateToken = (req, res, next) =>{
+  const authHeader = req.headers['authorization'];
+  console.log(authHeader);
+  const token = authHeader && authHeader.split(' ')[1];
+  if(token === null)
+  {
+    return res.sendStatus(401);
+  }
+
+  jwt.verify(token, secretKey, (err, user)=>{
+    if(err){
+      return res.sendStatus(403);
+    }
+
+    req.user = user;
+    next();
+  })
+}
+
+router.get("/getAllUsers", authenticateToken, async (req, res) => {
   const result = await getAllUsers();
   if (result) {
     res.status(200).json(result);
@@ -36,8 +59,11 @@ router.post("/deleteUser", async (req, res) => {
 
 router.post("/authenticateUser", async (req, res) => {
    const {user} = req.body;
-  const result = await authenticateUser(user);
+   let result = await authenticateUser(user);
   if(result.message === "success"){
+    // generate the JWT token and send it back to React.
+    const token = jwt.sign({userId: result?.user?.client_id}, secretKey);
+    result.result.token = token;
     res.status(200).json(result.result)
   }else{
     res.status(200).json("Unauthenticated");
